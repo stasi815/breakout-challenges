@@ -1,7 +1,6 @@
 /* ***************************************************************
 
 Challenge 1 - Make Constants
-* Make these into constants defined at the top.
 
 Challenge 2 - Identify duplicate code
 ** This block of code is repeated better to make a function for this.
@@ -54,21 +53,18 @@ const gameOver = 'GAME OVER';
 // Variables
 // --------------------------------------------------------------
 
-// ** Initialize the position of the ball and paddle
-// ** and set the ball speed and direction
-// **** A Ball Object would be good.
-
 let paddleX;
 
 // Objects (ball)
 let ball = {
-    x: 0, // ball.x
-    y: 0, // ball.y
-    dx: 0, // ball.dx
-    dy: 0, // ball.dy
-    radius: ballRadius,
+  x: 0, // ball.x
+  y: 0, // ball.y
+  dx: 0, // ball.dx
+  dy: 0, // ball.dy
+  radius: ballRadius,
 };
 
+// eslint-disable-next-line no-use-before-define
 resetBallAndPaddle();
 
 let score = 0;
@@ -82,7 +78,8 @@ let leftPressed = false;
 // --------------------------------------------------------------
 
 const bricks = [];
-// *** This would be better in a function
+
+// eslint-disable-next-line no-use-before-define
 initializeBricks();
 
 // **************************************************************
@@ -93,7 +90,7 @@ function drawBall() {
   ctx.beginPath();
   // * Math.PI * 2 could be a constant
   ctx.arc(ball.x, ball.y, ball.radius, 0, twoPI);
-  ctx.fillStyle = objectColor; // * Could be good as a constant
+  ctx.fillStyle = objectColor;
   ctx.fill();
   ctx.closePath();
 }
@@ -101,7 +98,7 @@ function drawBall() {
 function drawPaddle() {
   ctx.beginPath();
   ctx.rect(paddleX, canvasHeight - paddleHeight, paddleWidth, paddleHeight);
-  ctx.fillStyle = objectColor; // * Could be good as a constant
+  ctx.fillStyle = objectColor;
   ctx.fill();
   ctx.closePath();
 }
@@ -131,7 +128,7 @@ function drawBricks() {
 
         ctx.beginPath();
         ctx.rect(brickX, brickY, brickWidth, brickHeight);
-        ctx.fillStyle = objectColor; // * Could be good as a constant
+        ctx.fillStyle = objectColor;
         ctx.fill();
         ctx.closePath();
       }
@@ -144,13 +141,14 @@ function collisionDetection() {
     for (let r = 0; r < brickRowCount; r += 1) {
       const brick = bricks[c][r];
       if (brick.status === 1) {
+        // eslint-disable-next-line max-len
         if (ball.x > brick.x && ball.x < brick.x + brickWidth && ball.y > brick.y && ball.y < brick.y + brickHeight) {
           ball.dy = -ball.dy;
           brick.status = 0;
           score += 1;
           if (score === brickRowCount * brickColumnCount) {
             // eslint-disable-next-line no-alert
-            alert(winAlert); // * Could be good as a constant
+            alert(winAlert);
             document.location.reload();
           }
         }
@@ -160,29 +158,28 @@ function collisionDetection() {
 }
 
 function drawScore() {
-  ctx.font = gameFont; // * Could be good as a constant
-  ctx.fillStyle = objectColor; // * Could be good as a constant
+  ctx.font = gameFont;
+  ctx.fillStyle = objectColor;
   ctx.fillText(`Score: ${score}`, 8, 20);
 }
 
 function drawLives() {
-  ctx.font = gameFont; // * Could be good as a constant
-  ctx.fillStyle = objectColor; // * Could be good as a constant
-  // * canvas.width might be better as a constants
+  ctx.font = gameFont;
+  ctx.fillStyle = objectColor;
   ctx.fillText(`Lives: ${lives}`, canvasWidth - 65, 20);
 }
 
 function resetBallAndPaddle() {
-    ball.x = startPositionX;
-    ball.y = startPositionY;
-    ball.dx = 2;
-    ball.dy = -2;
-    paddleX = paddleXStart;
+  ball.x = startPositionX;
+  ball.y = startPositionY;
+  ball.dx = 2;
+  ball.dy = -2;
+  paddleX = paddleXStart;
 }
 
 function moveBall() {
-    ball.x += ball.dx;
-    ball.y += ball.dy;
+  ball.x += ball.dx;
+  ball.y += ball.dy;
 }
 
 function collisionsWithCanvasAndPaddle() {
@@ -206,8 +203,8 @@ function collisionsWithCanvasAndPaddle() {
       if (!lives) {
         // Game Over
         // eslint-disable-next-line no-alert
-        alert(gameOver); // * Could be good as a constant
-        ball.x = 200; 
+        alert(gameOver);
+        ball.x = 200;
         ball.y = 200;
         document.location.reload();
       } else {
@@ -240,8 +237,8 @@ function draw() {
   drawScore();
   drawLives();
   collisionDetection();
-  moveBall();  // *** Better as a separate function
-  movePaddle();  // *** Better as a function
+  moveBall();
+  movePaddle();
   collisionsWithCanvasAndPaddle();
 
   // Draw the screen again
