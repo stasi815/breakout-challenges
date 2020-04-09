@@ -56,6 +56,7 @@ const gameOver = 'GAME OVER';
 let paddleX;
 
 // Objects (ball)
+// eslint-disable-next-line prefer-const
 let ball = {
   x: 0, // ball.x
   y: 0, // ball.y
