@@ -234,7 +234,6 @@ function draw() {
   // Clear the canvas
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
   // Call helper functions
-  initializeBricks();
   drawBricks();
   drawBall();
   drawPaddle();
